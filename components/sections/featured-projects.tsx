@@ -1,112 +1,92 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ExternalLink, Github } from "lucide-react";
-import Image from "next/image";
+import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
-
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
-    CardFooter,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 
 const projects = [
     {
         title: "Mingalarrooms.com",
-        description: "A comprehensive property finding website tailored for the Myanmar market. Features include advanced search filtering, user authentication, and property management for agents.",
-        tags: ["React", "Node.js", "MySQL", "AWS S3", "Express"],
-        image: "/project-placeholder-1.jpg", // Placeholder until real image
-        links: {
-            demo: "https://mingalarrooms.com", // Assuming live URL based on name
-            github: "#", // Private repo likely
-        },
+        desc: "Property Finding Platform with efficient data fetching & analytics.",
+        tech: ["React", "Node.js", "MySQL", "Docker", "AWS S3"],
+        href: "#"
     },
     {
         title: "Pokémon Search App",
-        description: "A modern, high-performance Pokémon search application built with Next.js App Router and GraphQL. detailed stats, evolutions, and types.",
-        tags: ["Next.js 15", "GraphQL", "Tailwind CSS", "Framer Motion"],
-        image: "/project-placeholder-2.jpg", // Placeholder
-        links: {
-            demo: "#",
-            github: "https://github.com",
-        },
-    },
+        desc: "High-performance app utilizing GraphQL & modern state management.",
+        tech: ["Next.js", "GraphQL", "Shadcn/UI", "Tailwind CSS"],
+        href: "#"
+    }
 ];
 
 export function FeaturedProjects() {
     return (
-        <section id="projects" className="container mx-auto px-4 py-24">
-            <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                viewport={{ once: true }}
-                className="mb-12 text-center"
-            >
-                <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4">Featured Projects</h2>
-                <p className="text-muted-foreground max-w-2xl mx-auto">
-                    A selection of projects that showcase my technical depth and problem-solving abilities.
-                </p>
-            </motion.div>
+        <section id="projects" className="w-full py-32 bg-background text-foreground px-6 md:px-12 border-t border-border">
+            <div className="max-w-7xl mx-auto space-y-32">
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    className="flex flex-col md:flex-row items-end justify-between border-b border-border pb-8"
+                >
+                    <h2 className="text-6xl md:text-9xl font-bold font-mono tracking-tighter uppercase leading-none">
+                        Selected<br />Works
+                    </h2>
+                    <span className="font-mono text-sm tracking-widest text-muted-foreground mb-2">
+                        (2023 — 2025)
+                    </span>
+                </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                {projects.map((project, index) => (
-                    <motion.div
-                        key={index}
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: index * 0.2 }}
-                        viewport={{ once: true }}
-                    >
-                        <Card className="h-full flex flex-col overflow-hidden border-border/50 hover:border-primary/50 transition-all hover:shadow-xl dark:bg-card/50">
-                            <div className="relative h-48 w-full bg-muted overflow-hidden group">
-                                <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 group-hover:scale-105 transition-transform duration-500" />
-                                <div className="absolute inset-0 flex items-center justify-center text-muted-foreground font-mono text-sm opacity-50">
-                                    {project.title} Preview
+                <div className="space-y-24">
+                    {projects.map((project, index) => (
+                        <motion.div
+                            key={index}
+                            initial={{ opacity: 0, y: 50 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.2 }}
+                            className="group relative cursor-pointer"
+                        >
+                            {/* Image Placeholder */}
+                            <div className="w-full h-[50vh] md:h-[70vh] bg-muted border border-border relative overflow-hidden mb-8 transition-transform duration-700 ease-out group-hover:scale-[1.01]">
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                    <span className="font-mono text-sm text-muted-foreground uppercase tracking-widest">
+                                        Project Preview Image
+                                    </span>
+                                </div>
+                                {/* Overlay on hover */}
+                                <div className="absolute inset-0 bg-foreground mix-blend-difference opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                            </div>
+
+                            {/* Info */}
+                            <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6 border-b border-border pb-8">
+                                <div>
+                                    <h3 className="text-4xl md:text-6xl font-bold font-mono uppercase tracking-tighter mb-2 group-hover:text-transparent group-hover:stroke-foreground group-hover:stroke-1 transition-all duration-300"
+                                        style={{ WebkitTextStroke: "1px var(--foreground)" }}>
+                                        {project.title}
+                                    </h3>
+                                    <p className="text-lg md:text-xl text-muted-foreground font-mono tracking-wide uppercase">
+                                        {project.desc}
+                                    </p>
+                                </div>
+
+                                <div className="flex flex-col md:items-end gap-4">
+                                    <div className="flex gap-2">
+                                        {project.tech.map(t => (
+                                            <span key={t} className="px-3 py-1 border border-border text-xs font-mono uppercase tracking-widest text-muted-foreground">
+                                                {t}
+                                            </span>
+                                        ))}
+                                    </div>
+                                    <Link href={project.href} className="inline-flex items-center gap-2 group/btn text-muted-foreground hover:text-foreground transition-colors">
+                                        <span className="uppercase font-mono text-sm tracking-widest group-hover/btn:underline decoration-foreground underline-offset-4">View Case Study</span>
+                                        <ArrowUpRight className="w-4 h-4 transition-transform group-hover/btn:-translate-y-1 group-hover/btn:translate-x-1" />
+                                    </Link>
                                 </div>
                             </div>
-                            <CardHeader>
-                                <CardTitle className="text-2xl">{project.title}</CardTitle>
-                                <CardDescription className="text-base mt-2">
-                                    {project.description}
-                                </CardDescription>
-                            </CardHeader>
-                            <CardContent className="flex-1">
-                                <div className="flex flex-wrap gap-2 mb-4">
-                                    {project.tags.map((tag) => (
-                                        <Badge key={tag} variant="secondary">
-                                            {tag}
-                                        </Badge>
-                                    ))}
-                                </div>
-                            </CardContent>
-                            <CardFooter className="flex gap-4">
-                                {project.links.github !== "#" && (
-                                    <Button variant="outline" size="sm" className="gap-2" asChild>
-                                        <Link href={project.links.github} target="_blank">
-                                            <Github className="h-4 w-4" />
-                                            Code
-                                        </Link>
-                                    </Button>
-                                )}
-                                {project.links.demo !== "#" && (
-                                    <Button size="sm" className="gap-2" asChild>
-                                        <Link href={project.links.demo} target="_blank">
-                                            <ExternalLink className="h-4 w-4" />
-                                            Live Demo
-                                        </Link>
-                                    </Button>
-                                )}
-                            </CardFooter>
-                        </Card>
-                    </motion.div>
-                ))}
+                        </motion.div>
+                    ))}
+                </div>
             </div>
         </section>
     );

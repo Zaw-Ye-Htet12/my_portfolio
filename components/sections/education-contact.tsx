@@ -1,96 +1,78 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { GraduationCap, MapPin, Phone, Mail } from "lucide-react";
+import { Copy } from "lucide-react";
 import Link from "next/link";
-
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { useState } from "react";
 
 export function EducationContact() {
+    const [copied, setCopied] = useState(false);
+    const email = "zawyehtet1004@gmail.com";
+
+    const handleCopy = () => {
+        navigator.clipboard.writeText(email);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+    }
+
     return (
-        <section id="contact" className="container mx-auto px-4 py-24 bg-secondary/10">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto">
-                {/* Education Section */}
-                <motion.div
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.5 }}
-                    viewport={{ once: true }}
-                >
-                    <h2 className="text-3xl font-bold tracking-tight mb-8 flex items-center gap-2">
-                        <GraduationCap className="h-8 w-8 text-primary" />
-                        Education
-                    </h2>
-                    <Card className="border-border/50 bg-background/50 backdrop-blur">
-                        <CardHeader>
-                            <CardTitle className="text-xl">KBTC University / NCC Education</CardTitle>
-                            <p className="text-muted-foreground">Higher Diploma in Computing (L5DC)</p>
-                        </CardHeader>
-                        <CardContent>
-                            <p className="text-sm text-muted-foreground">
-                                Specialized in Software Engineering, Database Design, and Network Security.
-                            </p>
-                        </CardContent>
-                    </Card>
-                </motion.div>
+        <section id="contact" className="w-full py-32 bg-background text-foreground px-6 md:px-12 border-t border-border">
+            <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-end justify-between gap-12">
 
-                {/* Contact Section */}
-                <motion.div
-                    initial={{ opacity: 0, x: 20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.5, delay: 0.2 }}
-                    viewport={{ once: true }}
-                >
-                    <h2 className="text-3xl font-bold tracking-tight mb-8">Get in Touch</h2>
-                    <div className="space-y-6">
-                        <p className="text-muted-foreground text-lg">
-                            I am currently based in Bangkok, Thailand (DTV Visa Holder) and immediately available for new opportunities.
-                        </p>
+                {/* Contact Info */}
+                <div className="flex-1 space-y-8">
+                    <motion.h2
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="text-6xl md:text-8xl font-bold font-mono tracking-tighter uppercase leading-none"
+                    >
+                        Let's<br />Talk
+                    </motion.h2>
 
+                    <p className="max-w-md text-muted-foreground font-mono text-sm leading-relaxed uppercase tracking-wide">
+                        Available for freelance projects and full-time opportunities.
+                        Let's build something scalable.
+                    </p>
+
+                    <div className="flex items-center gap-4">
+                        <a href={`mailto:${email}`} className="text-2xl md:text-4xl font-mono underline decoration-muted-foreground/30 underline-offset-8 hover:decoration-foreground transition-all">
+                            {email}
+                        </a>
+                        <button onClick={handleCopy} className="p-2 hover:bg-muted rounded-full transition-colors relative group">
+                            <Copy className="w-5 h-5 opacity-50 group-hover:opacity-100" />
+                            {copied && <span className="absolute -top-8 left-1/2 -translate-x-1/2 text-xs bg-foreground text-background px-2 py-1 font-mono uppercase">Copied!</span>}
+                        </button>
+                    </div>
+
+                    <div className="flex gap-6 pt-8">
+                        <Link href="#" className="uppercase font-mono tracking-widest text-sm hover:underline decoration-foreground underline-offset-4">LinkedIn</Link>
+                        <Link href="#" className="uppercase font-mono tracking-widest text-sm hover:underline decoration-foreground underline-offset-4">GitHub</Link>
+                        <Link href="#" className="uppercase font-mono tracking-widest text-sm hover:underline decoration-foreground underline-offset-4">Twitter</Link>
+                    </div>
+                </div>
+
+                {/* Education & Certs - Minimal Layout */}
+                <div className="w-full md:w-auto md:min-w-[300px] space-y-12 text-right">
+                    <div>
+                        <h3 className="text-sm font-mono uppercase tracking-widest text-muted-foreground mb-4">Education</h3>
                         <div className="space-y-4">
-                            <div className="flex items-center gap-4">
-                                <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-                                    <MapPin className="h-5 w-5" />
-                                </div>
-                                <div>
-                                    <p className="font-medium">Location</p>
-                                    <p className="text-muted-foreground">Bangkok, Thailand</p>
-                                </div>
+                            <div className="border-l border-border pl-4 py-1 hover:border-foreground transition-colors">
+                                <h4 className="font-bold text-md uppercase leading-tight">B.Sc Computer Science</h4>
+                                <p className="text-xs font-mono text-muted-foreground">KBTC / NCC Education (UK)</p>
+                                <p className="text-xs font-mono text-muted-foreground">Pursuing</p>
                             </div>
-
-                            <div className="flex items-center gap-4">
-                                <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-                                    <Phone className="h-5 w-5" />
-                                </div>
-                                <div>
-                                    <p className="font-medium">Phone</p>
-                                    <Link href="tel:+66815900403" className="text-muted-foreground hover:text-primary transition-colors">
-                                        +66 81 590 0403
-                                    </Link>
-                                </div>
-                            </div>
-
-                            <div className="flex items-center gap-4">
-                                <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-                                    <Mail className="h-5 w-5" />
-                                </div>
-                                <div>
-                                    <p className="font-medium">Email</p>
-                                    <Link href="mailto:zawyehtet1004@gmail.com" className="text-muted-foreground hover:text-primary transition-colors">
-                                        zawyehtet1004@gmail.com
-                                    </Link>
-                                </div>
+                            <div className="border-l border-border pl-4 py-1 hover:border-foreground transition-colors">
+                                <h4 className="font-bold text-md uppercase leading-tight">Level 5 Diploma</h4>
+                                <p className="text-xs font-mono text-muted-foreground">NCC Education (UK)</p>
+                                <p className="text-xs font-mono text-muted-foreground">Computing</p>
                             </div>
                         </div>
-
-                        <Button size="lg" className="w-full sm:w-auto mt-4" asChild>
-                            <Link href="mailto:zawyehtet1004@gmail.com">
-                                Say Hello
-                            </Link>
-                        </Button>
                     </div>
-                </motion.div>
+
+
+                </div>
+
             </div>
         </section>
     );

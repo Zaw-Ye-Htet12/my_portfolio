@@ -1,88 +1,202 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { Terminal } from "lucide-react";
 
-export function TerminalBio() {
-    const [text, setText] = useState("");
-    const fullText = `const developer = {
-  name: "Zaw Ye Htet",
-  role: "Full-Stack Developer",
-  company: "FRONTIIR (Myanmar Net)",
-  skills: [
-    "React", "Next.js", "Node.js",
-    "PostgreSQL", "Docker", "AWS"
-  ],
-  hardWorker: true,
-  quickLearner: true,
-  problemSolver: true,
-  hireable: function() {
-    return this.hardWorker && this.problemSolver;
-  }
-};`;
+interface Command {
+    cmd: string;
+    output: React.ReactNode;
+}
 
+const commands: Record<string, React.ReactNode> = {
+    help: (
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-muted-foreground">
+            <span><span className="text-blue-400">about</span> &mdash; Display bio information</span>
+            <span><span className="text-blue-400">stack</span> &mdash; List technical skills</span>
+            <span><span className="text-blue-400">projects</span> &mdash; View selected works</span>
+            <span><span className="text-blue-400">contact</span> &mdash; Show contact details</span>
+            <span><span className="text-blue-400">clear</span> &mdash; Clear terminal screen</span>
+        </div>
+    ),
+    about: (
+        <div className="space-y-2 text-muted-foreground">
+            <p>Name: <span className="text-foreground font-bold">Zaw Ye Htet (Simon)</span></p>
+            <p>Role: <span className="text-foreground">Full-Stack Software Engineer</span></p>
+            <p>Location: <span className="text-foreground">Bangkok, Thailand (DTV Visa Holder)</span></p>
+            <p>Status: <span className="text-green-500">Available for opportunities</span></p>
+            <p>Bio: Building scalable SaaS applications with modern web technologies.</p>
+        </div>
+    ),
+    stack: (
+        <div className="text-muted-foreground">
+            <p className="mb-2">Core Technologies:</p>
+            <div className="flex flex-wrap gap-2">
+                {["React", "Next.js", "TypeScript", "Node.js", "Supabase", "TailwindCSS"].map(tech => (
+                    <span key={tech} className="bg-muted px-2 py-1 rounded text-foreground text-xs">{tech}</span>
+                ))}
+            </div>
+        </div>
+    ),
+    projects: (
+        <div className="text-muted-foreground">
+            <p>Use the navigation or scroll down to view detailed project case studies.</p>
+        </div>
+    ),
+    contact: (
+        <div className="text-muted-foreground">
+            <p>Email: <a href="mailto:zawyehtet1004@gmail.com" className="text-blue-400 underline decoration-blue-400/30 underline-offset-4 hover:decoration-blue-400">zawyehtet1004@gmail.com</a></p>
+            <p>GitHub: <a href="https://github.com" target="_blank" className="text-blue-400 underline decoration-blue-400/30 underline-offset-4 hover:decoration-blue-400">github.com/zawyehtet</a></p>
+        </div>
+    ),
+    whoami: "guest@portfolio:~$ access_level: visitor",
+};
+
+export function TerminalBio() {
+    const [history, setHistory] = useState<Command[]>([]);
+    const [input, setInput] = useState("");
+    const [isFocused, setIsFocused] = useState(false);
+    const scrollRef = useRef<HTMLDivElement>(null);
+    const inputRef = useRef<HTMLInputElement>(null);
+
+    // Initial greeting
     useEffect(() => {
-        let index = 0;
-        const timer = setInterval(() => {
-            setText(fullText.slice(0, index));
-            index++;
-            if (index > fullText.length) {
-                clearInterval(timer);
+        setHistory([
+            {
+                cmd: "init",
+                output: (
+                    <div className="mb-4">
+                        <p className="text-muted-foreground">Welcome to ZYH Terminal v2.0.0</p>
+                        <p className="text-muted-foreground">Type <span className="text-blue-400">'help'</span> to see available commands.</p>
+                    </div>
+                )
             }
-        }, 25);
-        return () => clearInterval(timer);
-    }, [fullText]);
+        ]);
+    }, []);
+
+    // Auto-scroll
+    useEffect(() => {
+        if (scrollRef.current) {
+            scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+        }
+    }, [history]);
+
+    const handleCommand = (e: React.FormEvent) => {
+        e.preventDefault();
+        const cmd = input.trim().toLowerCase();
+
+        if (!cmd) return;
+
+        if (cmd === "clear") {
+            setHistory([]);
+            setInput("");
+            return;
+        }
+
+        let output: React.ReactNode;
+        if (commands[cmd]) {
+            output = commands[cmd];
+        } else {
+            output = (
+                <span className="text-red-400">
+                    Command not found: '{cmd}'. Type 'help' for available commands.
+                </span>
+            );
+        }
+
+        setHistory(prev => [...prev, { cmd, output }]);
+        setInput("");
+    };
+
+    const handleContainerClick = () => {
+        inputRef.current?.focus();
+    };
 
     return (
-        <section className="container mx-auto px-4 py-24 min-h-[50vh] flex items-center justify-center">
+        <section id="about" className="w-full bg-background py-20 px-4 md:px-8 flex justify-center border-t border-border/40">
             <motion.div
-                initial={{ opacity: 0, y: 50 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
                 viewport={{ once: true }}
-                className="w-full max-w-3xl rounded-xl border bg-[#1e1e1e] shadow-2xl overflow-hidden"
+                className="w-full max-w-4xl"
             >
-                <div className="flex items-center justify-between border-b border-white/10 bg-[#2d2d2d] px-4 py-3">
-                    <div className="flex space-x-2">
-                        <div className="h-3 w-3 rounded-full bg-red-500" />
-                        <div className="h-3 w-3 rounded-full bg-yellow-500" />
-                        <div className="h-3 w-3 rounded-full bg-green-500" />
+                {/* Window Container */}
+                <div
+                    className="relative rounded-xl overflow-hidden bg-[#1e1e1e] dark:bg-[#0d0d0d] shadow-2xl border border-gray-500/20 font-mono text-sm group"
+                    onClick={handleContainerClick}
+                >
+                    {/* Window Header */}
+                    <div className="flex items-center px-4 py-3 bg-[#e8e8e8] dark:bg-[#1a1a1a] border-b border-gray-300 dark:border-gray-800 select-none">
+                        <div className="flex gap-2">
+                            <div className="w-3 h-3 rounded-full bg-[#ff5f56] border border-[#e0443e] hover:brightness-110 transition-all cursor-pointer" />
+                            <div className="w-3 h-3 rounded-full bg-[#ffbd2e] border border-[#dea123] hover:brightness-110 transition-all cursor-pointer" />
+                            <div className="w-3 h-3 rounded-full bg-[#27c93f] border border-[#1aab29] hover:brightness-110 transition-all cursor-pointer" />
+                        </div>
+                        <div className="absolute left-0 right-0 flex justify-center pointer-events-none">
+                            <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400">
+                                <Terminal className="w-3 h-3" />
+                                <span className="text-xs font-medium font-sans">zaw-ye-htet — -zsh — 80x24</span>
+                            </div>
+                        </div>
                     </div>
-                    <div className="flex items-center gap-2 text-sm text-gray-400 font-mono">
-                        <Terminal className="h-4 w-4" />
-                        <span>bio.js</span>
-                    </div>
-                    <div className="w-16" /> {/* Spacer for balance */}
-                </div>
 
-                <div className="p-6 font-mono text-sm sm:text-base overflow-x-auto">
-                    <pre className="text-gray-300">
-                        <code>
-                            {text.split("\n").map((line, i) => (
-                                <div key={i} className="table-row">
-                                    <span className="table-cell select-none pr-4 text-right text-gray-600 w-8">
-                                        {i + 1}
-                                    </span>
-                                    <span className="table-cell">
-                                        {/* Basic syntax highlighting simulation */}
-                                        <span dangerouslySetInnerHTML={{
-                                            __html: line
-                                                .replace(/"(.*?)"/g, '<span class="text-[#ce9178]">"$1"</span>')
-                                                .replace(/(const|function|return|this)/g, '<span class="text-[#569cd6]">$1"</span>')
-                                                .replace(/([a-zA-Z0-9_]+):/g, '<span class="text-[#9cdcfe]">$1</span>:')
-                                                .replace(/(true|false)/g, '<span class="text-[#569cd6]">$1"</span>')
-                                        }} />
-                                        {/* Blinking cursor at the end of the last line being typed */}
-                                        {i === text.split("\n").length - 1 && (
-                                            <span className="animate-pulse inline-block w-2 h-4 bg-[#569cd6] align-middle ml-1" />
-                                        )}
-                                    </span>
+                    {/* Terminal Body */}
+                    <div
+                        ref={scrollRef}
+                        className="p-6 h-[450px] overflow-y-auto bg-[#1e1e1e] dark:bg-black text-gray-200 selection:bg-white/20 scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-transparent"
+                    >
+                        {/* Status Bar */}
+                        <div className="mb-6 flex justify-between text-xs text-gray-500 select-none">
+                            <span>Last login: {new Date().toDateString()} on ttys000</span>
+                        </div>
+
+                        {/* History */}
+                        <div className="space-y-4">
+                            {history.map((item, i) => (
+                                <div key={i} className="flex flex-col">
+                                    {item.cmd !== "init" && (
+                                        <div className="flex items-center gap-2">
+                                            <span className="text-green-400">➜</span>
+                                            <span className="text-blue-400">~</span>
+                                            <span className="text-gray-400">{item.cmd}</span>
+                                        </div>
+                                    )}
+                                    <div className="mt-1 ml-6 leading-relaxed">
+                                        {item.output}
+                                    </div>
                                 </div>
                             ))}
-                        </code>
-                    </pre>
+                        </div>
+
+                        {/* Input Line */}
+                        <form onSubmit={handleCommand} className="flex items-center gap-2 mt-4 relative">
+                            <span className="text-green-400 select-none">➜</span>
+                            <span className="text-blue-400 select-none">~</span>
+                            <input
+                                ref={inputRef}
+                                type="text"
+                                value={input}
+                                onChange={(e) => setInput(e.target.value)}
+                                onFocus={() => setIsFocused(true)}
+                                onBlur={() => setIsFocused(false)}
+                                className="bg-transparent outline-none border-none text-white w-full font-mono caret-white focus:ring-0 p-0 m-0 h-6"
+                                autoFocus
+                                spellCheck="false"
+                                autoComplete="off"
+                            />
+                            {/* Custom Cursor if needed, but native caret works well */}
+                        </form>
+                        <div className="h-4" /> {/* Spacer for scroll */}
+                    </div>
                 </div>
+
+                <div className="mt-4 flex justify-between items-center px-2">
+                    <p className="text-xs font-mono text-muted-foreground/60">
+                        * Try different commands to explore the system.
+                    </p>
+                    <div className={`w-2 h-2 rounded-full ${isFocused ? 'bg-green-500 animate-pulse' : 'bg-gray-500'}`} />
+                </div>
+
             </motion.div>
         </section>
     );

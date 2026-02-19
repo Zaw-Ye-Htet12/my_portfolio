@@ -256,13 +256,13 @@ export function Hero() {
             {/* Social Links sidebar (Fixed) */}
             <div className="absolute left-6 bottom-0 hidden md:flex flex-col gap-6 z-20 pb-8">
                 <div className="w-px h-20 bg-border mx-auto" />
-                <Link href="#" className="p-2 border border-border rounded-full hover:bg-foreground hover:text-background transition-all">
+                <Link href="https://github.com/Zaw-Ye-Htet12" target="_blank" rel="noopener noreferrer" className="p-2 border border-border rounded-full hover:bg-foreground hover:text-background transition-all">
                     <Github className="w-4 h-4" />
                 </Link>
-                <Link href="#" className="p-2 border border-border rounded-full hover:bg-foreground hover:text-background transition-all">
+                <Link href="https://www.linkedin.com/in/zawyehtet/" target="_blank" rel="noopener noreferrer" className="p-2 border border-border rounded-full hover:bg-foreground hover:text-background transition-all">
                     <Linkedin className="w-4 h-4" />
                 </Link>
-                <Link href="#" className="p-2 border border-border rounded-full hover:bg-foreground hover:text-background transition-all">
+                <Link href="mailto:zawyehtet1004@gmail.com" className="p-2 border border-border rounded-full hover:bg-foreground hover:text-background transition-all">
                     <Mail className="w-4 h-4" />
                 </Link>
             </div>

@@ -14,7 +14,7 @@ export function Footer() {
                     </span>
                     . The source code is available on{" "}
                     <Link
-                        href="https://github.com"
+                        href="https://github.com/Zaw-Ye-Htet12"
                         target="_blank"
                         rel="noreferrer"
                         className="font-medium underline underline-offset-4"
@@ -24,11 +24,11 @@ export function Footer() {
                     .
                 </p>
                 <div className="flex items-center gap-4">
-                    <Link href="https://github.com" target="_blank" className="text-muted-foreground hover:text-foreground transition-colors">
+                    <Link href="https://github.com/Zaw-Ye-Htet12" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
                         <Github className="h-4 w-4" />
                         <span className="sr-only">GitHub</span>
                     </Link>
-                    <Link href="https://linkedin.com" target="_blank" className="text-muted-foreground hover:text-foreground transition-colors">
+                    <Link href="https://www.linkedin.com/in/zawyehtet/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
                         <Linkedin className="h-4 w-4" />
                         <span className="sr-only">LinkedIn</span>
                     </Link>

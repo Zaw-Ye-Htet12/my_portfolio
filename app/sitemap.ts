@@ -1,12 +1,44 @@
 import { MetadataRoute } from 'next';
 
+const SITE_URL = 'https://zawyehtet-portfolio.vercel.app';
+
 export default function sitemap(): MetadataRoute.Sitemap {
     return [
         {
-            url: 'https://zawyehtet.dev', // Placeholder domain
+            url: SITE_URL,
+            lastModified: new Date(),
+            changeFrequency: 'weekly',
+            priority: 1,
+        },
+        {
+            url: `${SITE_URL}/#about`,
             lastModified: new Date(),
             changeFrequency: 'monthly',
-            priority: 1,
+            priority: 0.8,
+        },
+        {
+            url: `${SITE_URL}/#experience`,
+            lastModified: new Date(),
+            changeFrequency: 'monthly',
+            priority: 0.8,
+        },
+        {
+            url: `${SITE_URL}/#skills`,
+            lastModified: new Date(),
+            changeFrequency: 'monthly',
+            priority: 0.7,
+        },
+        {
+            url: `${SITE_URL}/#projects`,
+            lastModified: new Date(),
+            changeFrequency: 'monthly',
+            priority: 0.9,
+        },
+        {
+            url: `${SITE_URL}/#contact`,
+            lastModified: new Date(),
+            changeFrequency: 'monthly',
+            priority: 0.7,
         },
     ];
 }

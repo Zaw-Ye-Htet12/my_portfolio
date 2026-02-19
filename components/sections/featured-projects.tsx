@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 const projects = [
@@ -9,13 +10,15 @@ const projects = [
         title: "Mingalarrooms.com",
         desc: "Property Finding Platform with efficient data fetching & analytics.",
         tech: ["React", "Node.js", "MySQL", "Docker", "AWS S3"],
-        href: "#"
+        href: "#",
+        image: "/mingalarrooms.png"
     },
     {
         title: "Pokémon Search App",
         desc: "High-performance app utilizing GraphQL & modern state management.",
         tech: ["Next.js", "GraphQL", "Shadcn/UI", "Tailwind CSS"],
-        href: "#"
+        href: "#",
+        image: "/pokemon.png"
     }
 ];
 
@@ -49,11 +52,22 @@ export function FeaturedProjects() {
                         >
                             {/* Image Placeholder */}
                             <div className="w-full h-[50vh] md:h-[70vh] bg-muted border border-border relative overflow-hidden mb-8 transition-transform duration-700 ease-out group-hover:scale-[1.01]">
-                                <div className="absolute inset-0 flex items-center justify-center">
-                                    <span className="font-mono text-sm text-muted-foreground uppercase tracking-widest">
-                                        Project Preview Image
-                                    </span>
-                                </div>
+                                {project.image ? (
+                                    <Image
+                                        src={project.image}
+                                        alt={project.title}
+                                        fill
+                                        className="object-cover object-top"
+                                        sizes="(max-width: 768px) 100vw, 80vw"
+                                        priority={index === 0}
+                                    />
+                                ) : (
+                                    <div className="absolute inset-0 flex items-center justify-center">
+                                        <span className="font-mono text-sm text-muted-foreground uppercase tracking-widest">
+                                            Project Preview Image
+                                        </span>
+                                    </div>
+                                )}
                                 {/* Overlay on hover */}
                                 <div className="absolute inset-0 bg-foreground mix-blend-difference opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
                             </div>

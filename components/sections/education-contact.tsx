@@ -46,9 +46,8 @@ export function EducationContact() {
                     </div>
 
                     <div className="flex gap-6 pt-8">
-                        <Link href="#" className="uppercase font-mono tracking-widest text-sm hover:underline decoration-foreground underline-offset-4">LinkedIn</Link>
-                        <Link href="#" className="uppercase font-mono tracking-widest text-sm hover:underline decoration-foreground underline-offset-4">GitHub</Link>
-                        <Link href="#" className="uppercase font-mono tracking-widest text-sm hover:underline decoration-foreground underline-offset-4">Twitter</Link>
+                        <Link href="https://www.linkedin.com/in/zawyehtet/" className="uppercase font-mono tracking-widest text-sm hover:underline decoration-foreground underline-offset-4">LinkedIn</Link>
+                        <Link href="https://github.com/Zaw-Ye-Htet12" className="uppercase font-mono tracking-widest text-sm hover:underline decoration-foreground underline-offset-4">GitHub</Link>
                     </div>
                 </div>
 

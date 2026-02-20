@@ -63,13 +63,13 @@ const DecryptedText = ({ text, className, animateOnHover = false }: { text: stri
 const CodeSnippet = () => {
     const codeLines = [
         "class Developer {",
-        "  constructor() {",
-        "    this.name = 'Zaw Ye Htet';",
-        "    this.role = 'Full-Stack';",
-        "    this.stack = ['React', 'Next.js'];",
-        "  }",
-        "  deploy() {",
-        "    return 'Production Ready';",
+        "   constructor() {",
+        "       this.name = 'Zaw Ye Htet';",
+        "       this.role = 'Full-Stack';",
+        "       this.stack = ['Node.js', 'Next.js'];",
+        "   }",
+        "   deploy() {",
+        "       return 'Production Ready';",
         "  }",
         "}"
     ];

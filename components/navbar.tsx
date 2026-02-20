@@ -139,9 +139,9 @@ export function Navbar() {
                     <Button
                         asChild
                         variant="outline"
-                        className="ml-4 h-9 px-4 rounded-none border-border text-foreground hover:bg-foreground hover:text-background font-mono text-xs uppercase tracking-widest transition-all"
+                        className="ml-4 h-9 px-4 rounded-none border-border text-foreground font-mono text-xs uppercase tracking-widest transition-all"
                     >
-                        <Link href="/resume.pdf" target="_blank">Resume</Link>
+                        <a href="/ZawYeHtet_CV.pdf" download="ZawYeHtet_CV.pdf">Resume</a>
                     </Button>
                 </nav>
 
@@ -173,7 +173,7 @@ export function Navbar() {
                         asChild
                         className="w-full rounded-none bg-foreground text-background font-mono uppercase tracking-widest"
                     >
-                        <Link href="/resume.pdf">Resume</Link>
+                        <a href="/ZawYeHtet_CV.pdf" download="ZawYeHtet_CV.pdf">Resume</a>
                     </Button>
                 </motion.div>
             </div>

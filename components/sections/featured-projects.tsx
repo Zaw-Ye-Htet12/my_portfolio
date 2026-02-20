@@ -10,14 +10,28 @@ const projects = [
         title: "Mingalarrooms.com",
         desc: "Property Finding Platform with efficient data fetching & analytics.",
         tech: ["React", "Node.js", "MySQL", "Docker", "AWS S3"],
-        href: "#",
+        href: "https://mingalarrooms.com/",
         image: "/mingalarrooms.png"
+    },
+    {
+        title: "ThuRain Store",
+        desc: "Bilingual e-commerce platform for hardware & home appliances with futuristic UI.",
+        tech: ["Next.js", "Tailwind CSS", "Shadcn/UI", "Framer Motion", "i18n"],
+        href: "https://thurain-store.vercel.app/",
+        image: "/thurainstore.png"
+    },
+    {
+        title: "NextSound",
+        desc: "Music discovery app with AI-powered chatbot, streaming & smart recommendations.",
+        tech: ["Next.js", "Supabase", "Deezer API", "AI Chatbot", "Framer Motion"],
+        href: "https://nextsound-plum.vercel.app/",
+        image: "/nextsound.png"
     },
     {
         title: "Pokémon Search App",
         desc: "High-performance app utilizing GraphQL & modern state management.",
         tech: ["Next.js", "GraphQL", "Shadcn/UI", "Tailwind CSS"],
-        href: "#",
+        href: "https://search-pokemon.vercel.app/",
         image: "/pokemon.png"
     }
 ];
@@ -69,7 +83,7 @@ export function FeaturedProjects() {
                                     </div>
                                 )}
                                 {/* Overlay on hover */}
-                                <div className="absolute inset-0 bg-foreground mix-blend-difference opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                                <div className="absolute inset-0 bg-foreground mix-blend-difference opacity-0 transition-opacity duration-300 pointer-events-none" />
                             </div>
 
                             {/* Info */}

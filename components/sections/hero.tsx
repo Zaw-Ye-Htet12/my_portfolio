@@ -243,7 +243,7 @@ export function Hero() {
                     <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-background to-transparent z-10" />
 
                     <div className="flex gap-12 animate-marquee whitespace-nowrap items-center w-full">
-                        {["REACT", "NEXT.JS", "TYPESCRIPT", "NODE.JS", "SUPABASE", "AWS", "DOCKER", "GRAPHQL", "TAILWIND", "REDIS", "POSTGRESQL", "REACT", "NEXT.JS", "TYPESCRIPT", "NODE.JS", "SUPABASE", "AWS", "DOCKER", "GRAPHQL", "TAILWIND", "REDIS", "POSTGRESQL"].map((tech, i) => (
+                        {["REACT", "NEXT.JS", "TYPESCRIPT", "NODE.JS", "NestJS", "SUPABASE", "AWS", "DOCKER", "GRAPHQL", "TAILWIND", "REDIS", "POSTGRESQL", "REACT", "NEXT.JS", "TYPESCRIPT", "NODE.JS", "NestJS", "SUPABASE", "AWS", "DOCKER", "GRAPHQL", "TAILWIND", "REDIS", "POSTGRESQL"].map((tech, i) => (
                             <span key={i} className="text-2xl md:text-4xl font-mono font-bold text-muted-foreground/20 uppercase tracking-widest select-none">
                                 {tech}
                             </span>

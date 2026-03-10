@@ -1,10 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const experiences = [
     {
         company: "HexDev (Freelance)",
+        logo: "/hexdev_logo.png", // Will need to place actual logo in public folder
         role: "Frontend Developer",
         period: "Nov 2024 – Dec 2025",
         description: "Specialized in developing reusable and scalable UI components using React and Next.js. Achieved a ~20% increase in performance through strategic optimization.",
@@ -12,6 +14,7 @@ const experiences = [
     },
     {
         company: "FRONTIIR (Myanmar Net)",
+        logo: "/frontiir_logo.png", // Will need to place actual logo in public folder
         role: "Associate Software Engineer",
         period: "July 2023 – Mar 2024",
         description: "Engineered solutions for ERP and microservices-based systems using Python and Odoo. Enhanced system stability by resolving ~40% of production bugs.",
@@ -54,7 +57,19 @@ export function ExperienceTimeline() {
                                 <h3 className="text-2xl md:text-3xl font-bold uppercase mb-1 group-hover:skew-x-2 transition-transform duration-300">
                                     {exp.role}
                                 </h3>
-                                <p className="text-lg text-muted-foreground font-mono">{exp.company}</p>
+                                <div className="flex items-center gap-3">
+                                    {exp.logo && (
+                                        <div className="relative w-6 h-6 rounded-md overflow-hidden bg-muted flex-shrink-0">
+                                            <Image
+                                                src={exp.logo}
+                                                alt={`${exp.company} logo`}
+                                                fill
+                                                className="object-cover"
+                                            />
+                                        </div>
+                                    )}
+                                    <p className="text-lg text-muted-foreground font-mono">{exp.company}</p>
+                                </div>
                             </div>
 
                             {/* Tech & Description - Right Side */}
